@@ -4,6 +4,7 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{amsmath}
 
 % -----------------------------------------------------
 % bvraghav-tiet-ucs503p-article.sty
@@ -12,16 +13,13 @@
 % Variable: Lab Instructor
 \makeatletter \newcommand{\BvrSetLabInstructor}[1]{%
   \gdef\Bvr@LabInstructor{#1}}
-% default
 \newcommand{\Bvr@LabInstructor}{Dr. Raghav %
   B. Venkataramaiyer}
-% public accessor
 \newcommand{\BvrLabInstructorValue}{\Bvr@LabInstructor}
 \makeatother
 
 % Add subtitle
 \usepackage{titling}
-% -- Set title bold
 \pretitle{\begin{center}\bfseries\fontsize{18bp}{18bp}\selectfont}
 \makeatletter
 \newcommand{\BvrSubtitle}[1]{%
@@ -29,33 +27,37 @@
     \par\end{center}
     \begin{center}\large#1\end{center}
     \vskip 0.5em}%
-}
+}%
 \makeatother
 
-% Hints in the section title(s)
+% Hints in section titles
 \newcommand{\BvrHint}[1]{%
   {\normalfont\normalsize\itshape\hfill #1}}
 
 % -----------------------------------------------------
 
-\title{Grievance-Resolution System for a Tier-2/3 City}
+\title{VeriHire -- Internship \& Placement Opportunity Credibility Platform}
 
-\BvrSetLabInstructor{Dr. Raghav B. Venkataramaiyer}
+\BvrSetLabInstructor{Dr. Jeelani}
 
 \BvrSubtitle{%
   Project Proposal for UCS503P  \\
   Submitted to: \BvrLabInstructorValue \\ \bfseries
-  Thapar Institute of Engineering and Technology% 
+  Thapar Institute of Engineering and Technology%
 }
 
 \author{
-  Vidya Vaidyanathan, CSED%
-  \thanks{Roll No: \texttt{1024030xxx}, %
-    Email: \texttt{vvaidhanathan\_be24\@thapar.edu}}
-  \and 
-  Bhanurekha Ganesan, CSED%
-  \thanks{Roll No: \texttt{1024030xxx}, %
-    Email: \texttt{bganesan\_be24\@thapar.edu}}
+  Geet Rawal, CSED%
+  \thanks{Roll No: \texttt{1024160012}, %
+    Email: \texttt{grawal\_be24@thapar.edu}}
+  \and
+  Nidhish, CSED%
+  \thanks{Roll No: \texttt{1024160013}, %
+    Email: \texttt{nnidhish\_be24@thapar.edu}}
+  \and
+  Parvesh Lamba, CSED%
+  \thanks{Roll No: \texttt{1024160017}, %
+    Email: \texttt{plamba\_be24@thapar.edu}}
 }
 
 \date{\today}
@@ -64,179 +66,639 @@
 \maketitle
 
 \section{Higher-order goal%
-  \BvrHint{\ldots secondary framing}}
-This project aims to improve sustainable urban
-governance by reducing the time and effort required to
-resolve citizen issues. While the topic is broader than
-any single municipality, the immediate engineering
-objective is to translate \emph{efficient public
-  service delivery} into a measurable, deployable
-software solution.
+  \BvrHint{}}
 
-\section{Time-to-value %
-\BvrHint{\ldots primary heuristic}}
+This project aims to improve the safety and reliability of internship and
+placement discovery for students by reducing the uncertainty involved in
+evaluating online opportunities. Students frequently encounter internship
+and job opportunities through social media, messaging groups, professional
+networking platforms, emails, and independent websites, where credibility
+can be difficult to verify.
+
+The immediate engineering objective is to develop a measurable and deployable
+machine-learning-based software solution that can identify patterns associated
+with credible and potentially suspicious internship and placement opportunities.
+The system will provide students with an ML-based assessment that can assist
+them in deciding whether additional verification is required before applying.
+
+\section{Time-to-value%
+\BvrHint{}}
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item We will deliver meaningful increments quickly by prototyping the core user workflow and validating it with users within a short iteration window.
-    \item We will prioritize fast feedback over perfection by using weekly iterations (and targeting CI-backed automation early) to reduce release friction.
-    \item Success is defined by what can be delivered and measured in the first iteration, then improved based on user feedback.
+    \item We will first implement the core workflow of opportunity submission,
+    preprocessing, ML inference, and result visualization.
+
+    \item We will develop the system through short iterations, allowing both
+    the software workflow and machine learning pipeline to be tested continuously.
+
+    \item Classical ML models will be implemented as baselines, followed by
+    the proposed semantic-embedding and structured-feature MLP architecture.
+
+    \item Model performance will be measured using precision, recall, F1-score,
+    confusion matrices, and prediction latency.
+
+    \item Success is defined by achieving a functional end-to-end ML workflow
+    in the first iteration and improving the model and application through
+    subsequent testing and feedback.
 \end{itemize}
 
 \section{Problem Statement}
-Citizens in a tier-2/3 Indian city face delays and uncertainty when reporting local issues (e.g., streetlight outages, water leakage, garbage accumulation, road potholes). Common pain points include:
+
+Students increasingly discover internship and placement opportunities through
+multiple online channels. However, they often lack a reliable and systematic
+way to evaluate the credibility of these opportunities before applying.
+
+Common pain points include:
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Fragmentation:} complaints are often made via multiple channels (calls, social media, paper forms), causing lost context.
-    \item \textbf{Low transparency:} citizens cannot easily see the status of their complaint (e.g., ``received'', ``assigned'', ``in progress'', ``resolved'').
-    \item \textbf{Slow coordination:} departments/field teams lack a unified, trackable workflow with clear ownership.
-    \item \textbf{Poor data quality:} duplicate or incomplete reports force rework and extend resolution time.
+
+    \item \textbf{Information fragmentation:} opportunity details are often
+    distributed across job posts, company websites, messages, emails, and
+    recruiter profiles.
+
+    \item \textbf{Suspicious requirements:} some opportunities may request
+    registration fees, deposits, paid training, or other forms of payment
+    before selection.
+
+    \item \textbf{Misleading claims:} unrealistic salary promises, guaranteed
+    placements, urgency-based language, or exaggerated benefits can make
+    suspicious opportunities difficult to identify.
+
+    \item \textbf{Unstructured information:} internship descriptions contain
+    textual, numerical, and categorical information that is difficult to
+    evaluate manually.
+
+    \item \textbf{Limited reporting:} students generally lack a centralized
+    platform through which suspicious opportunities can be reported and
+    information can be shared with others.
+
+    \item \textbf{Manual verification:} students often have to independently
+    investigate companies, recruiters, and job descriptions before deciding
+    whether to apply.
 \end{itemize}
 
-\textbf{Why this matters now (contextual relevance):} In an urban setting with limited staff bandwidth, even small process improvements can noticeably reduce resolution delays and repeated submissions.
+\textbf{Why this matters now (contextual relevance):}
+Students frequently make internship and placement decisions under time
+constraints and with incomplete information. A machine-learning-based system
+can learn patterns from labelled historical data and provide an initial
+credibility assessment, reducing the effort required for manual evaluation.
 
-\section{Proposed Solution %
-\BvrHint{\ldots Software Proposition}}
+\section{Proposed Solution%
+\BvrHint{}}
+
 \subsection{Overview}
-Build a \textbf{web-based} ``Grievance-to-Resolution'' system with the following components:
+
+Build a \textbf{web-based} ``Opportunity-to-Credibility'' platform with the
+following components:
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Citizen submission portal:} users submit an issue with photo (optional), category, and locality/ward.
-    \item \textbf{Automated triage:} basic duplicate detection and completeness checks.
-    \item \textbf{Department workflow:} assign issues to relevant department/team and update statuses.
-    \item \textbf{Status transparency:} citizens track status and receive notifications when resolved.
-    \item \textbf{Admin/ops dashboard:} performance summaries (resolution time, backlog).
+
+    \item \textbf{Opportunity submission portal:} students submit internship
+    or placement information such as company, role, description, salary,
+    location, recruiter information, and application details.
+
+    \item \textbf{Data preprocessing:} submitted information is cleaned,
+    normalized, and transformed into textual, numerical, and categorical
+    features suitable for machine learning.
+
+    \item \textbf{ML prediction engine:} the proposed hybrid model combines
+    semantic text embeddings with structured opportunity features and uses a
+    task-specific Multi-Layer Perceptron (MLP) to predict the opportunity's
+    credibility/risk category.
+
+    \item \textbf{Prediction interface:} the system displays the prediction,
+    confidence/probability information, and supporting indicators to the
+    student without presenting the result as absolute proof of fraud.
+
+    \item \textbf{Community reporting:} students can report suspicious
+    opportunities and provide additional information or evidence.
+
+    \item \textbf{Admin/moderator dashboard:} authorized users can review
+    opportunities, reports, verification decisions, and model predictions.
+
+    \item \textbf{Analytics:} administrators can view statistics related to
+    opportunities, predictions, reports, model performance, and system usage.
 \end{itemize}
 
 \subsection{Core workflow}
+
 \begin{enumerate}[leftmargin=0.7cm]
-    \item Citizen creates a complaint and receives a complaint ID immediately.
-    \item System validates completeness and suggests possible duplicates (lightweight similarity on text/category and approximate location).
-    \item Department staff update status (Received $\rightarrow$ Assigned $\rightarrow$ In Progress $\rightarrow$ Resolved).
-    \item Citizen views status updates and resolution notes.
+
+    \item A student submits an internship or placement opportunity and
+    receives an opportunity ID.
+
+    \item The system validates and normalizes the submitted information.
+
+    \item The opportunity text is prepared for semantic embedding while
+    numerical and categorical attributes are encoded as structured features.
+
+    \item A pretrained \textbf{all-MiniLM-L6-v2} Sentence Transformer generates
+    a semantic representation of the opportunity text.
+
+    \item The semantic embedding and encoded structured features are fused and
+    passed to the task-specific MLP classifier.
+
+    \item The model generates a predicted credibility/risk category and
+    associated probability/confidence information.
+
+    \item Supporting indicators are generated from relevant input features
+    and the prediction is stored in the system.
+
+    \item The result is displayed to the student. Students can report
+    suspicious opportunities, while moderators can review reports and
+    verification status.
 \end{enumerate}
 
-\subsection{Operational constraints for an educational, tier-2/3 setting}
+\subsection{Operational constraints for an educational setting}
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item Keep the solution usable on low-to-mid range devices via responsive web design.
-    \item Avoid dependence on advanced research algorithms; focus on workflow, automation, and system correctness.
-    \item Design for deployability using common web hosting and managed databases.
+
+    \item Keep the solution usable on common student devices through
+    responsive web design.
+
+    \item Use a suitable labelled dataset for supervised machine learning
+    and maintain a clear separation between training, validation, and testing
+    data.
+
+    \item Use a pretrained sentence encoder as a feature extractor rather
+    than training a large language model from scratch.
+
+    \item Keep the task-specific MLP and inference pipeline lightweight enough
+    to provide predictions within an acceptable response time.
+
+    \item Avoid claiming absolute fraud detection; the system will provide
+    an ML-based assessment to support student decision-making.
+
+    \item Design the system for deployment using common web hosting,
+    managed databases, and a lightweight Python ML inference service.
 \end{itemize}
 
-\section{Solution Approach %
-\BvrHint{\ldots Engineering focus}}
-This is an engineering course project, so we focus on scalable administrative and workflow aspects rather than novel algorithm research.
+\section{Solution Approach%
+\BvrHint{}}
 
-\subsection{Duplicate/quality assistance %
-\BvrHint{\ldots non-research}}
-Duplicate detection will be heuristic-based:
+This is an engineering course project with a machine learning component.
+The focus will be on developing a complete, deployable ML-enabled software
+system rather than solely optimizing a machine learning algorithm.
+
+The overall pipeline will be:
+
+\[
+\text{Data Collection}
+\rightarrow
+\text{Data Cleaning}
+\rightarrow
+\text{Feature Engineering}
+\rightarrow
+\text{Model Training}
+\rightarrow
+\text{Evaluation}
+\rightarrow
+\text{Deployment}
+\]
+
+\subsection{Machine learning pipeline%
+\BvrHint{}}
+
+The problem will be formulated as a \textbf{supervised classification problem}.
+The dataset will contain internship/job opportunity examples with labels
+representing their credibility/risk category.
+
+Potential features include:
 \begin{itemize}[leftmargin=0.7cm]
-    \item Normalize text (category + short description keywords).
-    \item Use a simple similarity measure (e.g., token overlap / TF-IDF cosine with threshold) without claiming state-of-the-art.
-    \item Show top candidate duplicates to staff for decision; never fully auto-delete or auto-reject.
+
+    \item Internship/job description
+    \item Salary or stipend information
+    \item Payment-related terms and requirements
+    \item Experience requirements
+    \item Company information
+    \item Recruiter/contact information
+    \item Application method
+    \item Location and employment type
+    \item Relevant textual patterns
 \end{itemize}
 
-\subsection{Web architecture %
-\BvrHint{\ldots web-based solution}}
-A typical 3-tier web architecture:
+The project will use a two-stage modeling strategy. First, lightweight
+classical models will be used as \textbf{baselines}. TF-IDF features may be
+combined with Logistic Regression, Support Vector Machine, Random Forest,
+or Gradient Boosting to establish reference performance.
+
+The proposed final architecture will use a pretrained
+\textbf{Sentence Transformer, all-MiniLM-L6-v2}, as a semantic feature
+extractor. Its text embedding will be combined with encoded numerical and
+categorical opportunity features. The resulting fused feature vector will
+be passed to a task-specific \textbf{Multi-Layer Perceptron (MLP)}.
+
+The proposed MLP architecture is:
+
+\[
+\text{Fused Features}
+\rightarrow
+128
+\rightarrow
+64
+\rightarrow
+32
+\rightarrow
+\text{Output}
+\]
+
+The output layer will represent the selected credibility/risk classes.
+The exact hidden-layer configuration may be tuned using validation
+experiments while keeping the architecture feasible for a semester-long
+project.
+
+Model comparison will use accuracy, precision, recall, F1-score, confusion
+matrices, and inference latency. The final architecture will be selected
+based on predictive performance, generalization, interpretability of the
+results, and deployment feasibility.
+
+\subsection{NLP and feature engineering%
+\BvrHint{}}
+
+Since internship and placement opportunities contain substantial textual
+information, NLP techniques will be used to convert descriptions into
+machine-readable representations.
+
+The proposed NLP pipeline is:
+
+\[
+\text{Opportunity Text}
+\rightarrow
+\text{Text Cleaning}
+\rightarrow
+\text{all-MiniLM-L6-v2}
+\rightarrow
+\text{Semantic Embedding}
+\]
+
+Structured information will be processed separately:
+
+\[
+\text{Numerical/Categorical Features}
+\rightarrow
+\text{Encoding/Scaling}
+\rightarrow
+\text{Structured Feature Vector}
+\]
+
+The two representations will then be combined:
+
+\[
+\text{Semantic Embedding}
++
+\text{Structured Features}
+\rightarrow
+\text{Feature Fusion}
+\rightarrow
+\text{MLP}
+\rightarrow
+\text{Prediction}
+\]
+
+TF-IDF will be retained as a lightweight baseline for comparison rather than
+as the primary proposed architecture. This provides an empirical comparison
+between classical text classification and the proposed semantic feature
+fusion approach.
+
+\subsection{Supporting indicators and responsible interpretation%
+\BvrHint{}}
+
+VeriHire will not present an ML prediction as a definitive statement that an
+opportunity is fraudulent or genuine. Instead, the system will communicate
+the predicted credibility/risk category together with supporting indicators
+derived from the submitted opportunity.
+
+Examples of indicators may include payment requirements, unusual application
+methods, unrealistic compensation patterns, suspicious textual signals, or
+other features learned and identified during the project. These indicators
+are intended to help the student understand why additional verification may
+be appropriate.
+
+\subsection{Web architecture%
+\BvrHint{}}
+
+A modular architecture will consist of:
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Frontend:} responsive UI for citizens and staff (status pages, submission form, dashboard).
-    \item \textbf{Backend API:} authentication, complaint submission, status transitions, assignment logic.
-    \item \textbf{Database:} store users, complaints, status history, attachments metadata.
+
+    \item \textbf{Frontend:} responsive React + Vite interface for students,
+    moderators, and administrators.
+
+    \item \textbf{Backend API:} Node.js and Express.js services responsible
+    for authentication, opportunity management, database operations,
+    reporting, and application logic.
+
+    \item \textbf{ML service:} Python-based FastAPI service responsible for
+    preprocessing, Sentence Transformer embedding generation, structured
+    feature encoding, model loading, and MLP inference.
+
+    \item \textbf{Database:} PostgreSQL database storing users, opportunities,
+    predictions, reports, verification decisions, feedback, and related
+    information.
+
+    \item \textbf{Model artifacts:} versioned sentence encoder configuration,
+    trained MLP parameters, feature encoders/scalers, and model metadata.
 \end{itemize}
+
+The ML service will remain independent from the main application backend,
+allowing the trained model to be updated without major changes to the
+frontend or core application.
 
 \subsection{CI/CD and fast delivery enabler}
+
 CI/CD will be used to:
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item Automatically build and run tests on every change.
-    \item Produce repeatable deployment artifacts to staging.
+
+    \item Automatically build the frontend and backend and run tests on
+    every change.
+
+    \item Test ML preprocessing, feature encoding, and prediction functions.
+
+    \item Produce repeatable deployment artifacts for staging.
+
     \item Enable safe and frequent releases of incremental features.
 \end{itemize}
 
-\section{Evaluation Criterion %
-\BvrHint{\ldots measurable and attributable}}
-We define success using measurable metrics tied to the core workflow.
+\section{Evaluation Criterion%
+\BvrHint{}}
+
+We define success using measurable metrics associated with both the
+machine learning model and the core application workflow.
 
 \subsection{Primary evaluation metric}
-\textbf{Time-to-acknowledgement (TTA):} time between complaint submission and ``Received/Assigned'' status creation in the system.
+
+\textbf{ML Classification F1-score:} the primary evaluation metric will be
+the F1-score obtained on a held-out test dataset.
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item Target: median TTA $\le$ 2 hours during pilot window.
-    \item Attribution: measured from database timestamps (submission vs. first status update by staff).
+
+    \item \textbf{Target:} achieve an initial F1-score of approximately
+    $0.80$ or above, subject to dataset quality and class distribution.
+
+    \item \textbf{Attribution:} calculated by comparing model predictions
+    against the known labels in the held-out test dataset.
 \end{itemize}
 
 \subsection{Secondary evaluation metrics}
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Resolution time reduction:} reduce time-to-resolved compared to baseline process (even if baseline is collected via survey).
-    \item \textbf{Duplicate rate:} percentage of complaints flagged as duplicates and resolved without rework.
-    \item \textbf{User clarity:} citizen-reported clarity of status using a simple 1--5 feedback question.
-    \item \textbf{Reliability:} availability of staging/production for login and submission during business hours (e.g., $\ge$ 99\% uptime in pilot).
+
+    \item \textbf{Precision:} proportion of predicted suspicious
+    opportunities that are actually suspicious according to the test labels.
+
+    \item \textbf{Recall:} proportion of suspicious opportunities correctly
+    identified by the model.
+
+    \item \textbf{Inference latency:} time required by the ML service to
+    preprocess an opportunity and return its prediction.
+
+    \item \textbf{Model comparison:} performance difference between the
+    classical baseline models and the proposed embedding + structured
+    features + MLP architecture.
+
+    \item \textbf{User clarity:} student-reported understanding of the
+    prediction using a simple 1--5 feedback question.
+
+    \item \textbf{Reliability:} availability of login, submission, and
+    prediction functionality during the pilot.
 \end{itemize}
 
-\subsection{Pilot validation plan %
-\BvrHint{\ldots high-level}}
+\subsection{Pilot validation plan%
+\BvrHint{}}
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item Recruit 10--20 pilot users (citizens) and 3--5 staff roles (department simulation if real staff unavailable).
-    \item Compare metrics before/after within the iteration window by logging baseline estimates via short interviews or existing process observations.
+
+    \item Prepare a labelled dataset containing credible and potentially
+    suspicious internship/job opportunities.
+
+    \item Divide the dataset into training, validation, and test sets and
+    compare the classical baselines against the proposed MLP architecture.
+
+    \item Integrate the selected model into the web application and conduct
+    testing with approximately 10--20 student users.
+
+    \item Collect feedback regarding usability, prediction clarity, and
+    system performance and use the results for subsequent improvements.
 \end{itemize}
 
-\section{Scalability %
-\BvrHint{\ldots with foresight}}
+\section{Scalability%
+\BvrHint{}}
+
 The proposition should scale in both theoretical and practical senses.
 
 \begin{enumerate}[leftmargin=0.7cm]
-    \item \textbf{Scalable (theoretically):} The system should support growth in number of complaints and concurrent dashboard usage by:
+
+    \item \textbf{Scalable (theoretically):} The system should support growth
+    in the number of users and opportunities by:
+
     \begin{itemize}[leftmargin=0.7cm]
-        \item decoupling components (frontend/backend),
+        \item decoupling frontend, backend, ML service, and database,
         \item enabling pagination and indexing for common queries,
-        \item using stateless API design.
+        \item using stateless API design,
+        \item separating model inference from the main application,
+        \item maintaining versioned ML models.
     \end{itemize}
-    
-    \item \textbf{Operationally deployable (practically):} The system should run on common web hosting:
+
+    \item \textbf{Operationally deployable (practically):} The system should
+    run on common cloud infrastructure:
+
     \begin{itemize}[leftmargin=0.7cm]
-        \item managed database,
+        \item managed PostgreSQL database,
+        \item platform-hosted frontend and backend,
+        \item Python/FastAPI ML inference service,
         \item containerized or platform-hosted deployment,
-        \item CI/CD pipeline for staging/production.
+        \item CI/CD pipeline for staging and production.
     \end{itemize}
+
 \end{enumerate}
 
 \section{Engine availability heuristic}
-A mature set of ``engines'' (tooling/services) is available to implement this as a web-based project:
-\begin{itemize}[leftmargin=0.7cm]
-    \item Web framework for REST APIs and templated/reactive pages.
-    \item Managed relational or document database.
-    \item Authentication approach (token-based or session-based).
-    \item Object storage for optional attachments (or local storage for pilot).
-    \item Test framework for unit/integration tests.
-    \item CI runner and staging deployment target.
-\end{itemize}
-We will use these mature components to focus on workflow design, correctness, and measurement rather than inventing new infrastructure.
 
-\section{Project scope and deliverables %
-\BvrHint{\ldots iteration-friendly}}
-\subsection{Initial deliverable %
-\BvrHint{\ldots first iteration}}
+A mature set of tools and frameworks is available to implement VeriHire as
+a machine-learning-enabled web project:
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item Citizen submission form + complaint ID generation
-    \item Staff workflow: update status and assignment
-    \item Citizen status page: view timeline/history
-    \item Basic logging and timestamps for TTA measurement
-    \item CI: build + backend unit tests + linting
-    \item CD to staging with a single command or pipeline job
+
+    \item \textbf{React + Vite:} responsive frontend development.
+
+    \item \textbf{Node.js + Express.js:} backend REST APIs and application
+    logic.
+
+    \item \textbf{PostgreSQL:} structured relational database.
+
+    \item \textbf{Python, Pandas and NumPy:} data processing and preparation.
+
+    \item \textbf{Scikit-learn:} baseline model training, preprocessing,
+    evaluation, and comparison.
+
+    \item \textbf{Sentence Transformers:} pretrained semantic text
+    embeddings using \texttt{all-MiniLM-L6-v2}.
+
+    \item \textbf{PyTorch:} implementation and training of the task-specific
+    MLP classifier.
+
+    \item \textbf{FastAPI:} serving the trained ML pipeline through an API.
+
+    \item \textbf{Git and GitHub:} version control and collaborative
+    development.
+
+    \item \textbf{Testing and CI tools:} automated unit/integration testing
+    and deployment pipelines.
+\end{itemize}
+
+We will use these mature components to focus on data quality, feature
+engineering, model evaluation, software architecture, correctness, and
+measurement rather than developing new infrastructure.
+
+\section{Project scope and deliverables%
+\BvrHint{}}
+
+\subsection{Initial deliverable%
+\BvrHint{}}
+
+\begin{itemize}[leftmargin=0.7cm]
+
+    \item Student registration and login.
+
+    \item Internship/job opportunity submission and opportunity ID generation.
+
+    \item Opportunity browsing and basic search.
+
+    \item Dataset preparation, cleaning, and preprocessing pipeline.
+
+    \item TF-IDF/classical ML baseline for initial performance measurement.
+
+    \item Sentence Transformer embedding pipeline using
+    \texttt{all-MiniLM-L6-v2}.
+
+    \item Structured feature encoding and feature-fusion pipeline.
+
+    \item Task-specific MLP classifier and evaluation pipeline.
+
+    \item Prediction API using Python/FastAPI.
+
+    \item Web interface for displaying the ML prediction and supporting
+    indicators.
+
+    \item PostgreSQL database for users, opportunities, predictions, and
+    reports.
+
+    \item CI: build, linting, and backend/ML unit tests.
+
+    \item CD to staging with a single command or pipeline job.
 \end{itemize}
 
 \subsection{Subsequent deliverables}
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item Lightweight duplicate suggestions with staff review
-    \item Notification layer (email/SMS optional in later iteration; can start with in-app notifications)
-    \item Admin dashboard for metrics and backlog
-    \item Improved search/filtering and indexed queries for scale readiness
+
+    \item Hyperparameter tuning and comparison of baseline and MLP models.
+
+    \item Improved NLP and structured feature engineering.
+
+    \item Prediction interpretation and supporting indicators.
+
+    \item Community reporting and moderator review.
+
+    \item Company verification and evidence management.
+
+    \item Advanced search and filtering.
+
+    \item Notification layer using in-app notifications, with email as an
+    optional later enhancement.
+
+    \item Admin dashboard for model, opportunity, and moderation analytics.
+
+    \item Model version management and improved scale readiness.
 \end{itemize}
 
 \section{Risks and mitigations}
+
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Data privacy / consent:} minimize collected data; keep attachments optional; store only what is needed.
-    \item \textbf{Staff adoption:} provide an easy UI for status updates; keep workflow steps minimal; include shortcuts.
-    \item \textbf{Evaluation measurement ambiguity:} instrument timestamps and define clear status transitions before development begins.
-    \item \textbf{Operational issues in pilot:} use staging early; ensure CI/CD produces repeatable deployments.
+
+    \item \textbf{Dataset quality:} poor or biased training data can reduce
+    model performance. \textbf{Mitigation:} perform data cleaning,
+    exploratory analysis, duplicate removal, and appropriate dataset
+    splitting.
+
+    \item \textbf{Class imbalance:} one class may contain significantly more
+    examples than another. \textbf{Mitigation:} analyze class distribution
+    and use class weighting or suitable resampling techniques where required.
+
+    \item \textbf{Overfitting:} the model may perform well on training data
+    but poorly on unseen opportunities. \textbf{Mitigation:} use validation
+    and test datasets, cross-validation where appropriate, dropout or other
+    regularization techniques, and early stopping where applicable.
+
+    \item \textbf{False predictions:} the model may incorrectly classify
+    legitimate or suspicious opportunities. \textbf{Mitigation:} evaluate
+    precision, recall, F1-score, and confusion matrices and clearly present
+    predictions as decision support.
+
+    \item \textbf{Model drift:} suspicious opportunity patterns may change
+    over time. \textbf{Mitigation:} design the system so that new labelled
+    data can be used for future model retraining.
+
+    \item \textbf{Data privacy:} user submissions may contain personal or
+    company information. \textbf{Mitigation:} minimize collected data and
+    apply authentication and access controls.
+
+    \item \textbf{Operational issues in pilot:} ML service or deployment
+    failures may affect demonstrations. \textbf{Mitigation:} deploy the
+    inference service early, test the prediction API independently, and
+    maintain a stable model version for demonstration.
 \end{itemize}
 
 \section{Summary}
-This project proposes a deployable web platform to reduce grievance handling delays in a tier-2/3 city context. It meets the course criteria by emphasizing time-to-value through rapid iterations, implementing CI/CD to support frequent safe releases, and using measurable evaluation criteria (especially time-to-acknowledgement). It remains focused on engineering workflow and scalability readiness rather than research-driven novelty.
+
+This project proposes \textbf{VeriHire}, a deployable machine-learning-based
+web platform designed to help students evaluate the credibility of
+internship and placement opportunities.
+
+The final proposed ML workflow is:
+
+\[
+\text{Opportunity Text}
+\rightarrow
+\text{all-MiniLM-L6-v2 Embedding}
+\]
+
+\[
+\text{Structured Features}
+\rightarrow
+\text{Encoding/Scaling}
+\]
+
+\[
+\text{Semantic Embedding}
++
+\text{Structured Features}
+\rightarrow
+\text{Feature Fusion}
+\rightarrow
+\text{MLP}
+\rightarrow
+\text{Credibility/Risk Prediction}
+\]
+
+The project will use classical TF-IDF-based models as baselines and compare
+them with the proposed semantic-embedding and structured-feature MLP
+architecture. The final model will be selected using precision, recall,
+F1-score, confusion matrices, inference latency, and deployment feasibility.
+
+It meets the course criteria by emphasizing rapid iterations, modular
+software architecture, machine learning integration, CI/CD, testing,
+scalability, and measurable evaluation criteria.
+
+The proposed technology stack consists of \textbf{React, Vite, Node.js,
+Express.js, PostgreSQL, Python, Pandas, NumPy, Scikit-learn, Sentence
+Transformers, PyTorch, FastAPI, and Git/GitHub}. The project is feasible for
+a team of 3--4 students within one semester, with advanced explainability,
+analytics, moderation, notifications, and model improvements introduced
+incrementally.
+
+The ultimate objective is to help students move beyond simply asking
+``Is this internship genuine?'' and instead receive a data-driven
+assessment that helps them make a more informed decision before applying.
 
 \end{document}
