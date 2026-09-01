@@ -8,7 +8,9 @@
 
 **Author(s):**
 
-`[Your Name]` `<[your-email]>`
+`Nidhish` `<nnidhish_be24@thapar.edu>`
+`Geet Rawal` `<grawal_be24@thapar.edu>`
+`Parvesh` `<plamba_be24@thapar.edu>`
 
 ## Project Description
 
