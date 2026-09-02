@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+
+```
+<meta charset="utf-8"/>
+
+<meta
+    content="width=device-width, initial-scale=1.0"
+    name="viewport"
+/>
+
+<title>VeriHire - Main Recruiter Dashboard</title>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<!-- Fonts -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet"
+/>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+/>
+
+<!-- Tailwind Configuration -->
+<script>
+
+    tailwind.config = {
+
+        darkMode: "class",
+
+        theme: {
+
+            extend: {
+
+                colors: {
+
+                    "tertiary-container": "#007d55",
+
+                    "error-container": "#ffdad6",
+
+                    "on-primary": "#ffffff",
+
+                    "on-secondary-fixed": "#07006c",
+
+                    "on-primary-fixed": "#00174b",
+
+                    "inverse-on-surface": "#ecf1ff",
+
+                    "secondary-container": "#6063ee",
+
+                    "on-background": "#111c2d",
+
+                    "primary-fixed-dim": "#b4c5ff",
+
+                    "outline": "#737686",
+
+                    "on-error": "#ffffff",
+
+                    "surface-container-lowest": "#ffffff",
+
+                    "surface-container-high": "#dee8ff",
+
+                    "surface-container-low": "#f0f3ff",
+
+                    "outline-variant": "#c3c6d7",
+
+                    "tertiary-fixed": "#6ffbbe",
+
+                    "error": "#ba1a1a",
+
+                    "primary-container": "#2563eb",
+
+                    "surface-variant": "#d8e3fb",
+
+                    "primary": "#004ac6",
+
+                    "surface-container-highest": "#d8e3fb",
+
+                    "on-secondary-container": "#fffbff",
+
+                    "on-surface": "#111c2d",
+
+                    "tertiary": "#006242",
+
+                    "inverse-surface": "#263143",
+
+                    "on-primary-fixed-variant": "#003ea8",
+
+                    "on-surface-variant": "#434655",
+
+                    "surface-bright": "#f9f9ff",
+
+                    "on-tertiary": "#ffffff",
+
+                    "primary-fixed": "#dbe1ff",
+
+                    "surface-dim": "#cfdaf2",
+
+                    "on-tertiary-fixed-variant": "#005236",
+
+                    "inverse-primary": "#b4c5ff",
+
+                    "secondary-fixed-dim": "#c0c1ff",
+
+                    "secondary-fixed": "#e1e0ff",
+
+                    "secondary": "#4648d4",
+
+                    "surface-container": "#e7eeff",
+
+                    "surface-tint": "#0053db",
+
+                    "background": "#f9f9ff",
+
+                    "on-tertiary-container": "#bdffdb",
+
+                    "on-secondary-fixed-variant": "#2f2ebe",
+
+                    "tertiary-fixed-dim": "#4edea3",
+
+                    "on-secondary": "#ffffff",
+
+                    "on-error-container": "#93000a",
+
+                    "surface": "#f9f9ff",
+
+                    "on-tertiary-fixed": "#002113",
+
+                    "on-primary-container": "#eeefff"
+
+                },
+
+                borderRadius: {
+
+                    "DEFAULT": "0.25rem",
+
+                    "lg": "0.5rem",
+
+                    "xl": "0.75rem",
+
+                    "full": "9999px"
+
+                },
+
+                spacing: {
+
+                    "xs": "8px",
+
+                    "sm": "12px",
+
+                    "md": "16px",
+
+                    "lg": "24px",
+
+                    "gutter": "24px",
+
+                    "xl": "32px",
+
+                    "2xl": "48px",
+
+                    "3xl": "64px",
+
+                    "base": "4px"
+
+                },
+
+                fontFamily: {
+
+                    "body-md": ["Inter"],
+
+                    "headline-lg-mobile": ["Inter"],
+
+                    "title-lg": ["Inter"],
+
+                    "display-lg": ["Inter"],
+
+                    "headline-lg": ["Inter"],
+
+                    "body-sm": ["Inter"],
+
+                    "headline-md": ["Inter"],
+
+                    "body-lg": ["Inter"],
+
+                    "label-md": ["Inter"]
+
+                },
+
+                fontSize: {
+
+                    "body-md": [
+                        "16px",
+                        {
+                            lineHeight: "24px",
+                            fontWeight: "400"
+                        }
+                    ],
+
+                    "headline-lg-mobile": [
+                        "24px",
+                        {
+                            lineHeight: "32px",
+                            fontWeight: "600"
+                        }
+                    ],
+
+                    "title-lg": [
+                        "20px",
+                        {
+                            lineHeight: "28px",
+                            fontWeight: "600"
+                        }
+                    ],
+
+                    "display-lg": [
+                        "48px",
+                        {
+                            lineHeight: "56px",
+                            letterSpacing: "-0.02em",
+                            fontWeight: "700"
+                        }
+                    ],
+
+                    "headline-lg": [
+                        "32px",
+                        {
+                            lineHeight: "40px",
+                            letterSpacing: "-0.01em",
+                            fontWeight: "600"
+                        }
+                    ],
+
+                    "body-sm": [
+                        "14px",
+                        {
+                            lineHeight: "20px",
+                            fontWeight: "400"
+                        }
+                    ],
+
+                    "headline-md": [
+                        "24px",
+                        {
+                            lineHeight: "32px",
+                            fontWeight: "600"
+                        }
+                    ],
+
+                    "body-lg": [
+                        "18px",
+                        {
+                            lineHeight: "28px",
+                            fontWeight: "400"
+                        }
+                    ],
+
+                    "label-md": [
+                        "12px",
+                        {
+                            lineHeight: "16px",
+                            letterSpacing: "0.05em",
+                            fontWeight: "600"
+                        }
+                    ]
+
+                }
+
+            }
+
+        }
+
+    };
+
+</script>
+
+
+<style>
+
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f0f3ff;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #c3c6d7;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #737686;
+    }
+
+</style>
+```
+
+</head>
+
+<body class="bg-background text-on-background min-h-screen font-body-md text-body-md overflow-x-hidden">
+
+<!-- ========================================================= -->
+
+<!-- SIDEBAR -->
+
+<!-- ========================================================= -->
+
+<nav
+    class="bg-surface border-r border-outline-variant h-screen w-64 fixed left-0 top-0 overflow-y-auto flex flex-col py-lg px-md z-50"
+>
+
+```
+<!-- Logo -->
+
+<div class="mb-xl flex items-center gap-sm">
+
+    <span
+        class="material-symbols-outlined text-primary text-3xl"
+        style="font-variation-settings: 'FILL' 1;"
+    >
+        security
+    </span>
+
+    <div>
+
+        <h1 class="text-title-lg font-title-lg font-bold text-primary">
+            VeriHire
+        </h1>
+
+        <p class="text-body-sm font-body-sm text-on-surface-variant">
+            Recruiter Platform
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- Navigation -->
+
+<div class="flex-1 space-y-2">
+
+
+    <!-- Dashboard -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-container-highest transition-colors duration-200"
+        href="dashboard.html"
+    >
+
+        <span class="material-symbols-outlined">
+            dashboard
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Dashboard
+        </span>
+
+    </a>
+
+
+    <!-- Candidates -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200"
+        href="#candidates"
+    >
+
+        <span class="material-symbols-outlined">
+            group
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Candidates
+        </span>
+
+    </a>
+
+
+    <!-- Applications -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200"
+        href="#applications"
+    >
+
+        <span class="material-symbols-outlined">
+            description
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Applications
+        </span>
+
+    </a>
+
+
+    <!-- Verification -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200"
+        href="#verification"
+    >
+
+        <span class="material-symbols-outlined">
+            verified_user
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Verification
+        </span>
+
+    </a>
+
+
+    <!-- AI Insights -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200"
+        href="#insights"
+    >
+
+        <span class="material-symbols-outlined">
+            psychology
+        </span>
+
+        <span class="font-label-md text-label-md">
+            AI Insights
+        </span>
+
+    </a>
+
+
+    <!-- Reports -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200"
+        href="#reports"
+    >
+
+        <span class="material-symbols-outlined">
+            assessment
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Reports
+        </span>
+
+    </a>
+
+
+    <!-- Settings -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200 mt-auto"
+        href="#settings"
+    >
+
+        <span class="material-symbols-outlined">
+            settings
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Settings
+        </span>
+
+    </a>
+
+
+    <!-- Help -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200"
+        href="#"
+    >
+
+        <span class="material-symbols-outlined">
+            help
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Help
+        </span>
+
+    </a>
+
+</div>
+
+
+<!-- Profile + Logout -->
+
+<div class="mt-lg pt-md border-t border-outline-variant">
+
+
+    <!-- Profile -->
+
+    <a
+        class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200"
+        href="#"
+    >
+
+        <span class="material-symbols-outlined">
+            account_circle
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Profile
+        </span>
+
+    </a>
+
+
+    <!-- Logout -->
+
+    <button
+        onclick="logout()"
+        class="w-full flex items-center gap-md px-md py-sm rounded-lg text-red-600 hover:bg-red-50 transition-colors duration-200"
+    >
+
+        <span class="material-symbols-outlined">
+            logout
+        </span>
+
+        <span class="font-label-md text-label-md">
+            Logout
+        </span>
+
+    </button>
+
+</div>
+```
+
+</nav>
+
+<!-- ========================================================= -->
+
+<!-- MAIN CONTENT -->
+
+<!-- ========================================================= -->
+
+<div class="ml-64 flex flex-col min-h-screen">
+
+```
+<!-- ===================================================== -->
+<!-- TOP NAVIGATION -->
+<!-- ===================================================== -->
+
+<header
+    class="bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center h-16 px-gutter sticky top-0 z-40 w-full"
+>
+
+
+    <!-- Search -->
+
+    <div class="flex-1 max-w-md">
+
+        <div class="relative">
+
+            <span class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+
+                <span class="material-symbols-outlined text-outline">
+                    search
+                </span>
+
+            </span>
+
+            <input
+                type="text"
+                placeholder="Search candidates..."
+                class="w-full pl-12 pr-md py-sm bg-surface-container-low border border-outline-variant rounded-lg text-sm focus:border-primary focus:ring-2 focus:ring-primary/10"
+            />
+
+        </div>
+
+    </div>
+
+
+    <!-- Right Actions -->
+
+    <div class="flex items-center gap-md">
+
+
+        <!-- Notifications -->
+
+        <button
+            class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all relative"
+        >
+
+            <span class="material-symbols-outlined">
+                notifications
+            </span>
+
+            <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+
+        </button>
+
+
+        <!-- Settings -->
+
+        <button
+            class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all"
+        >
+
+            <span class="material-symbols-outlined">
+                settings
+            </span>
+
+        </button>
+
+
+        <!-- Add Candidate -->
+
+        <button
+            onclick="addCandidate()"
+            class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md text-label-md hover:bg-blue-700 transition-colors shadow-sm ml-sm flex items-center gap-xs"
+        >
+
+            <span class="material-symbols-outlined text-[18px]">
+                add
+            </span>
+
+            Add Candidate
+
+        </button>
+
+
+        <!-- Avatar -->
+
+        <button
+            class="ml-sm w-9 h-9 rounded-full bg-primary text-white overflow-hidden border border-outline-variant flex items-center justify-center font-bold"
+            onclick="showProfile()"
+        >
+            A
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ===================================================== -->
+<!-- DASHBOARD -->
+<!-- ===================================================== -->
+
+<main
+    class="flex-1 p-gutter bg-background max-w-container-max mx-auto w-full"
+>
+
+
+    <!-- ================================================= -->
+    <!-- WELCOME -->
+    <!-- ================================================= -->
+
+    <div class="mb-xl">
+
+        <h2
+            class="font-headline-lg text-headline-lg text-on-surface mb-xs"
+        >
+            Good morning, Alex 👋
+        </h2>
+
+        <p class="font-body-md text-body-md text-on-surface-variant">
+
+            Here’s what’s happening with your hiring pipeline today.
+
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- KPI CARDS -->
+    <!-- ================================================= -->
+
+    <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-2xl"
+    >
+
+
+        <!-- Total Candidates -->
+
+        <div
+            class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+        >
+
+            <div class="flex justify-between items-start mb-sm">
+
+                <span class="text-on-surface-variant font-label-md uppercase tracking-wider">
+                    Total Candidates
+                </span>
+
+                <span class="material-symbols-outlined text-outline">
+                    group
+                </span>
+
+            </div>
+
+            <div class="flex items-baseline gap-sm mb-xs">
+
+                <span class="font-display-lg text-display-lg text-on-surface">
+                    1,248
+                </span>
+
+            </div>
+
+            <div class="flex items-center text-tertiary font-label-md">
+
+                <span class="material-symbols-outlined text-[16px] mr-1">
+                    trending_up
+                </span>
+
+                +12.5% this month
+
+            </div>
+
+        </div>
+
+
+        <!-- Verified Candidates -->
+
+        <div
+            class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+        >
+
+            <div class="flex justify-between items-start mb-sm">
+
+                <span class="text-on-surface-variant font-label-md uppercase tracking-wider">
+                    Verified Candidates
+                </span>
+
+                <span class="material-symbols-outlined text-outline">
+                    verified_user
+                </span>
+
+            </div>
+
+            <div class="flex items-baseline gap-sm mb-xs">
+
+                <span class="font-display-lg text-display-lg text-on-surface">
+                    892
+                </span>
+
+            </div>
+
+            <div class="flex items-center text-tertiary font-label-md">
+
+                <span class="material-symbols-outlined text-[16px] mr-1">
+                    trending_up
+                </span>
+
+                +8.4% this month
+
+            </div>
+
+        </div>
+
+
+        <!-- Pending Verification -->
+
+        <div
+            class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+        >
+
+            <div class="absolute top-0 right-0 w-16 h-16 bg-error-container rounded-bl-full opacity-50"></div>
+
+            <div class="flex justify-between items-start mb-sm relative z-10">
+
+                <span class="text-on-surface-variant font-label-md uppercase tracking-wider">
+                    Pending Verification
+                </span>
+
+                <span class="material-symbols-outlined text-outline">
+                    pending_actions
+                </span>
+
+            </div>
+
+            <div class="flex items-baseline gap-sm mb-xs relative z-10">
+
+                <span class="font-display-lg text-display-lg text-on-surface">
+                    76
+                </span>
+
+            </div>
+
+            <div class="flex items-center text-error font-label-md relative z-10">
+
+                <span class="material-symbols-outlined text-[16px] mr-1">
+                    error
+                </span>
+
+                5 require attention
+
+            </div>
+
+        </div>
+
+
+        <!-- High Match -->
+
+        <div
+            class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+        >
+
+            <div class="flex justify-between items-start mb-sm">
+
+                <span class="text-on-surface-variant font-label-md uppercase tracking-wider">
+                    High Match Candidates
+                </span>
+
+                <span class="material-symbols-outlined text-outline">
+                    hotel_class
+                </span>
+
+            </div>
+
+            <div class="flex items-baseline gap-sm mb-xs">
+
+                <span class="font-display-lg text-display-lg text-on-surface">
+                    143
+                </span>
+
+            </div>
+
+            <div class="flex items-center text-tertiary font-label-md">
+
+                <span class="material-symbols-outlined text-[16px] mr-1">
+                    trending_up
+                </span>
+
+                +18.2% this month
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- MAIN GRID -->
+    <!-- ================================================= -->
+
+    <div
+        class="grid grid-cols-1 lg:grid-cols-3 gap-xl mb-2xl"
+    >
+
+
+        <!-- ================================================= -->
+        <!-- LEFT / MAIN SECTION -->
+        <!-- ================================================= -->
+
+        <div class="lg:col-span-2 space-y-xl">
+
+
+            <!-- ================================================= -->
+            <!-- CANDIDATE PIPELINE -->
+            <!-- ================================================= -->
+
+            <div
+                id="candidates"
+                class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm"
+            >
+
+                <div class="flex justify-between items-center mb-lg">
+
+                    <h3 class="font-title-lg text-title-lg text-on-surface">
+                        Candidate Pipeline
+                    </h3>
+
+
+                    <select
+                        class="bg-surface-container-low border border-outline-variant rounded-md px-sm py-xs text-body-sm text-on-surface-variant focus:ring-primary focus:border-primary"
+                    >
+
+                        <option>
+                            Last 30 days
+                        </option>
+
+                        <option>
+                            This Quarter
+                        </option>
+
+                        <option>
+                            Year to Date
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Chart -->
+
+                <div
+                    class="h-64 flex items-end gap-sm relative pb-xl px-sm"
+                >
+
+                    <!-- Grid -->
+
+                    <div
+                        class="absolute left-0 top-0 bottom-xl w-full flex flex-col justify-between border-l border-b border-outline-variant"
+                    >
+
+                        <div class="w-full border-t border-outline-variant/30 border-dashed"></div>
+
+                        <div class="w-full border-t border-outline-variant/30 border-dashed"></div>
+
+                        <div class="w-full border-t border-outline-variant/30 border-dashed"></div>
+
+                        <div class="w-full border-t border-outline-variant/30 border-dashed"></div>
+
+                    </div>
+
+
+                    <!-- Applied -->
+
+                    <div class="flex-1 flex flex-col items-center z-10 group">
+
+                        <div
+                            class="w-full max-w-[48px] bg-surface-container-highest rounded-t-md h-[90%] transition-all group-hover:bg-primary-fixed relative"
+                        >
+
+                            <div
+                                class="absolute -top-6 w-full text-center text-label-md opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                                1,248
+                            </div>
+
+                        </div>
+
+                        <span class="text-label-md mt-sm text-on-surface-variant">
+                            Applied
+                        </span>
+
+                    </div>
+
+
+                    <!-- Screening -->
+
+                    <div class="flex-1 flex flex-col items-center z-10 group">
+
+                        <div
+                            class="w-full max-w-[48px] bg-surface-container-high rounded-t-md h-[75%] transition-all group-hover:bg-primary-fixed relative"
+                        ></div>
+
+                        <span class="text-label-md mt-sm text-on-surface-variant">
+                            Screening
+                        </span>
+
+                    </div>
+
+
+                    <!-- Verified -->
+
+                    <div class="flex-1 flex flex-col items-center z-10 group">
+
+                        <div
+                            class="w-full max-w-[48px] bg-primary-fixed-dim rounded-t-md h-[60%] transition-all group-hover:bg-primary-fixed relative"
+                        ></div>
+
+                        <span class="text-label-md mt-sm text-on-surface-variant">
+                            Verified
+                        </span>
+
+                    </div>
+
+
+                    <!-- Shortlisted -->
+
+                    <div class="flex-1 flex flex-col items-center z-10 group">
+
+                        <div
+                            class="w-full max-w-[48px] bg-secondary-container opacity-80 rounded-t-md h-[40%] transition-all group-hover:opacity-100 relative"
+                        ></div>
+
+                        <span class="text-label-md mt-sm text-on-surface-variant">
+                            Shortlisted
+                        </span>
+
+                    </div>
+
+
+                    <!-- Interview -->
+
+                    <div class="flex-1 flex flex-col items-center z-10 group">
+
+                        <div
+                            class="w-full max-w-[48px] bg-primary opacity-80 rounded-t-md h-[25%] transition-all group-hover:opacity-100 relative"
+                        ></div>
+
+                        <span class="text-label-md mt-sm text-on-surface-variant">
+                            Interview
+                        </span>
+
+                    </div>
+
+
+                    <!-- Hired -->
+
+                    <div class="flex-1 flex flex-col items-center z-10 group">
+
+                        <div
+                            class="w-full max-w-[48px] bg-tertiary rounded-t-md h-[10%] transition-all group-hover:bg-tertiary-container relative"
+                        ></div>
+
+                        <span class="text-label-md mt-sm text-on-surface-variant">
+                            Hired
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- VERIFICATION TABLE -->
+            <!-- ================================================= -->
+
+            <div
+                id="verification"
+                class="bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden"
+            >
+
+                <div
+                    class="p-lg border-b border-outline-variant flex justify-between items-center"
+                >
+
+                    <h3 class="font-title-lg text-title-lg text-on-surface">
+                        Recent Verification Activity
+                    </h3>
+
+                    <button
+                        onclick="viewAllVerifications()"
+                        class="text-primary font-label-md hover:underline"
+                    >
+                        View All
+                    </button>
+
+                </div>
+
+
+                <div class="overflow-x-auto">
+
+                    <table class="w-full text-left border-collapse">
+
+                        <thead
+                            class="bg-surface-container-lowest border-b border-outline-variant"
+                        >
+
+                            <tr>
+
+                                <th class="p-md font-label-md text-on-surface-variant uppercase">
+                                    Candidate Name
+                                </th>
+
+                                <th class="p-md font-label-md text-on-surface-variant uppercase">
+                                    Position
+                                </th>
+
+                                <th class="p-md font-label-md text-on-surface-variant uppercase">
+                                    Status
+                                </th>
+
+                                <th class="p-md font-label-md text-on-surface-variant uppercase">
+                                    AI Match
+                                </th>
+
+                                <th class="p-md font-label-md text-on-surface-variant uppercase">
+                                    Date
+                                </th>
+
+                                <th class="p-md font-label-md text-on-surface-variant uppercase text-right">
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody class="divide-y divide-outline-variant/50">
+
+
+                            <!-- Rahul -->
+
+                            <tr class="hover:bg-surface-container-lowest transition-colors">
+
+                                <td class="p-md font-body-sm text-on-surface font-medium">
+                                    Rahul Sharma
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    Software Engineer
+                                </td>
+
+                                <td class="p-md">
+
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary">
+
+                                        <span class="w-2 h-2 rounded-full bg-tertiary mr-1"></span>
+
+                                        Verified
+
+                                    </span>
+
+                                </td>
+
+                                <td class="p-md font-body-sm font-semibold text-tertiary">
+                                    94%
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    Oct 24
+                                </td>
+
+                                <td class="p-md text-right">
+
+                                    <button
+                                        onclick="candidateAction('Rahul Sharma')"
+                                        class="text-outline hover:text-primary transition-colors"
+                                    >
+
+                                        <span class="material-symbols-outlined text-[20px]">
+                                            more_vert
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Ananya -->
+
+                            <tr class="hover:bg-surface-container-lowest transition-colors bg-surface-container-lowest/50">
+
+                                <td class="p-md font-body-sm text-on-surface font-medium">
+                                    Ananya Singh
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    Data Analyst
+                                </td>
+
+                                <td class="p-md">
+
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary">
+
+                                        <span class="w-2 h-2 rounded-full bg-tertiary mr-1"></span>
+
+                                        Verified
+
+                                    </span>
+
+                                </td>
+
+                                <td class="p-md font-body-sm font-semibold text-tertiary">
+                                    89%
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    Oct 23
+                                </td>
+
+                                <td class="p-md text-right">
+
+                                    <button
+                                        onclick="candidateAction('Ananya Singh')"
+                                        class="text-outline hover:text-primary transition-colors"
+                                    >
+
+                                        <span class="material-symbols-outlined text-[20px]">
+                                            more_vert
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Arjun -->
+
+                            <tr class="hover:bg-surface-container-lowest transition-colors">
+
+                                <td class="p-md font-body-sm text-on-surface font-medium">
+                                    Arjun Mehta
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    Backend Developer
+                                </td>
+
+                                <td class="p-md">
+
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-secondary-container/20 text-secondary">
+
+                                        <span class="w-2 h-2 rounded-full bg-secondary mr-1 animate-pulse"></span>
+
+                                        Pending
+
+                                    </span>
+
+                                </td>
+
+                                <td class="p-md font-body-sm font-semibold text-secondary">
+                                    76%
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    Oct 23
+                                </td>
+
+                                <td class="p-md text-right">
+
+                                    <button
+                                        onclick="candidateAction('Arjun Mehta')"
+                                        class="text-outline hover:text-primary transition-colors"
+                                    >
+
+                                        <span class="material-symbols-outlined text-[20px]">
+                                            more_vert
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Priya -->
+
+                            <tr class="hover:bg-surface-container-lowest transition-colors bg-surface-container-lowest/50">
+
+                                <td class="p-md font-body-sm text-on-surface font-medium">
+                                    Priya Kapoor
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    ML Engineer
+                                </td>
+
+                                <td class="p-md">
+
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-tertiary-container/20 text-tertiary">
+
+                                        <span class="w-2 h-2 rounded-full bg-tertiary mr-1"></span>
+
+                                        Verified
+
+                                    </span>
+
+                                </td>
+
+                                <td class="p-md font-body-sm font-semibold text-tertiary">
+                                    96%
+                                </td>
+
+                                <td class="p-md font-body-sm text-on-surface-variant">
+                                    Oct 22
+                                </td>
+
+                                <td class="p-md text-right">
+
+                                    <button
+                                        onclick="candidateAction('Priya Kapoor')"
+                                        class="text-outline hover:text-primary transition-colors"
+                                    >
+
+                                        <span class="material-symbols-outlined text-[20px]">
+                                            more_vert
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- RIGHT SIDE -->
+        <!-- ================================================= -->
+
+        <div class="lg:col-span-1 space-y-xl">
+
+
+            <!-- ================================================= -->
+            <!-- AI INSIGHTS -->
+            <!-- ================================================= -->
+
+            <div
+                id="insights"
+                class="rounded-xl p-lg border border-primary-fixed-dim bg-gradient-to-br from-surface-container-low to-primary-fixed shadow-md relative overflow-hidden"
+            >
+
+                <div class="absolute -right-8 -top-8 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+
+
+                <div class="flex items-center gap-sm mb-md relative z-10">
+
+                    <span class="material-symbols-outlined text-primary text-3xl">
+                        psychology
+                    </span>
+
+                    <h3 class="font-title-lg text-title-lg text-primary">
+                        AI Hiring Insights
+                    </h3>
+
+                </div>
+
+
+                <ul class="space-y-md mb-lg relative z-10">
+
+
+                    <!-- Insight 1 -->
+
+                    <li class="flex items-start gap-sm">
+
+                        <span class="material-symbols-outlined text-tertiary text-[20px] mt-1">
+                            check_circle
+                        </span>
+
+                        <div>
+
+                            <p class="font-body-sm text-on-surface font-medium">
+                                12 High Potentials Found
+                            </p>
+
+                            <p class="text-xs text-on-surface-variant">
+                                Candidates scored &gt; 90% on recent assessments.
+                            </p>
+
+                        </div>
+
+                    </li>
+
+
+                    <!-- Insight 2 -->
+
+                    <li class="flex items-start gap-sm">
+
+                        <span class="material-symbols-outlined text-error text-[20px] mt-1">
+                            warning
+                        </span>
+
+                        <div>
+
+                            <p class="font-body-sm text-on-surface font-medium">
+                                3 Profiles Require Action
+                            </p>
+
+                            <p class="text-xs text-on-surface-variant">
+                                Background verification stalled. Manual review needed.
+                            </p>
+
+                        </div>
+
+                    </li>
+
+
+                    <!-- Insight 3 -->
+
+                    <li class="flex items-start gap-sm">
+
+                        <span class="material-symbols-outlined text-primary text-[20px] mt-1">
+                            trending_up
+                        </span>
+
+                        <div>
+
+                            <p class="font-body-sm text-on-surface font-medium">
+                                Time-to-Hire Improved
+                            </p>
+
+                            <p class="text-xs text-on-surface-variant">
+                                Average screening time down by 15% this week.
+                            </p>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+
+                <button
+                    onclick="viewInsights()"
+                    class="w-full flex items-center justify-center gap-xs bg-primary text-on-primary py-sm rounded-lg font-label-md hover:bg-blue-700 transition-colors relative z-10"
+                >
+
+                    View Detailed Insights
+
+                    <span class="material-symbols-outlined text-[18px]">
+                        arrow_forward
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- NEWEST APPLICATIONS -->
+            <!-- ================================================= -->
+
+            <div
+                id="applications"
+                class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm"
+            >
+
+                <h3 class="font-title-lg text-title-lg text-on-surface mb-md">
+                    Newest Applications
+                </h3>
+
+
+                <div class="space-y-md">
+
+
+                    <!-- Karan -->
+
+                    <div
+                        class="flex items-center justify-between p-sm hover:bg-surface-container-lowest rounded-lg transition-colors border border-transparent hover:border-outline-variant/30"
+                    >
+
+                        <div class="flex items-center gap-sm">
+
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                KS
+                            </div>
+
+                            <div>
+
+                                <p class="font-body-sm text-on-surface font-semibold">
+                                    Karan Singh
+                                </p>
+
+                                <p class="text-xs text-on-surface-variant">
+                                    Product Manager
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="text-right">
+
+                            <p class="font-body-sm font-bold text-tertiary">
+                                91% Match
+                            </p>
+
+                            <p class="text-xs text-outline">
+                                2h ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Neha -->
+
+                    <div
+                        class="flex items-center justify-between p-sm hover:bg-surface-container-lowest rounded-lg transition-colors border border-transparent hover:border-outline-variant/30"
+                    >
+
+                        <div class="flex items-center gap-sm">
+
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                NR
+                            </div>
+
+                            <div>
+
+                                <p class="font-body-sm text-on-surface font-semibold">
+                                    Neha Reddy
+                                </p>
+
+                                <p class="text-xs text-on-surface-variant">
+                                    UX Designer
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="text-right">
+
+                            <p class="font-body-sm font-bold text-secondary">
+                                84% Match
+                            </p>
+
+                            <p class="text-xs text-outline">
+                                5h ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- David -->
+
+                    <div
+                        class="flex items-center justify-between p-sm hover:bg-surface-container-lowest rounded-lg transition-colors border border-transparent hover:border-outline-variant/30"
+                    >
+
+                        <div class="flex items-center gap-sm">
+
+                            <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                DV
+                            </div>
+
+                            <div>
+
+                                <p class="font-body-sm text-on-surface font-semibold">
+                                    David Verma
+                                </p>
+
+                                <p class="text-xs text-on-surface-variant">
+                                    Frontend Developer
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="text-right">
+
+                            <p class="font-body-sm font-bold text-secondary">
+                                78% Match
+                            </p>
+
+                            <p class="text-xs text-outline">
+                                1d ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    onclick="viewAllApplications()"
+                    class="mt-md w-full text-center text-primary font-label-md hover:underline py-sm"
+                >
+
+                    View all applications
+
+                </button>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- QUICK ACTIONS -->
+            <!-- ================================================= -->
+
+            <div
+                id="reports"
+                class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm"
+            >
+
+                <h3 class="font-title-lg text-title-lg text-on-surface mb-md">
+                    Quick Actions
+                </h3>
+
+
+                <div class="grid grid-cols-2 gap-sm">
+
+
+                    <button
+                        onclick="addCandidate()"
+                        class="p-md rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-center"
+                    >
+
+                        <span class="material-symbols-outlined text-primary">
+                            person_add
+                        </span>
+
+                        <p class="text-xs font-semibold mt-1">
+                            Add Candidate
+                        </p>
+
+                    </button>
+
+
+                    <button
+                        onclick="generateReport()"
+                        class="p-md rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-center"
+                    >
+
+                        <span class="material-symbols-outlined text-primary">
+                            assessment
+                        </span>
+
+                        <p class="text-xs font-semibold mt-1">
+                            Generate Report
+                        </p>
+
+                    </button>
+
+
+                    <button
+                        onclick="startVerification()"
+                        class="p-md rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-center"
+                    >
+
+                        <span class="material-symbols-outlined text-tertiary">
+                            verified
+                        </span>
+
+                        <p class="text-xs font-semibold mt-1">
+                            Verify Candidate
+                        </p>
+
+                    </button>
+
+
+                    <button
+                        onclick="viewProfile()"
+                        class="p-md rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-center"
+                    >
+
+                        <span class="material-symbols-outlined text-secondary">
+                            account_circle
+                        </span>
+
+                        <p class="text-xs font-semibold mt-1">
+                            My Profile
+                        </p>
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- SYSTEM STATUS -->
+            <!-- ================================================= -->
+
+            <div
+                id="settings"
+                class="bg-surface rounded-xl p-lg border border-outline-variant shadow-sm"
+            >
+
+                <div class="flex items-center justify-between">
+
+                    <div>
+
+                        <h3 class="font-title-lg text-title-lg text-on-surface">
+                            System Status
+                        </h3>
+
+                        <p class="text-xs text-on-surface-variant mt-1">
+                            VeriHire services
+                        </p>
+
+                    </div>
+
+
+                    <div class="flex items-center gap-2">
+
+                        <span class="w-3 h-3 rounded-full bg-tertiary"></span>
+
+                        <span class="text-sm font-semibold text-tertiary">
+                            Operational
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+```
+
+</div>
+
+<!-- ========================================================= -->
+
+<!-- JAVASCRIPT -->
+
+<!-- ========================================================= -->
+
+<script>
+
+
+    // ---------------------------------------------------------
+    // LOGOUT
+    // ---------------------------------------------------------
+
+    function logout() {
+
+        const confirmed =
+            confirm("Are you sure you want to logout?");
+
+        if (confirmed) {
+
+            /*
+                Later, when JWT authentication is added,
+                remove the token here as well:
+
+                localStorage.removeItem("token");
+            */
+
+            window.location.href = "login.html";
+
+        }
+
+    }
+
+
+    // ---------------------------------------------------------
+    // ADD CANDIDATE
+    // ---------------------------------------------------------
+
+    function addCandidate() {
+
+        alert(
+            "Add Candidate feature will be connected to the backend soon."
+        );
+
+    }
+
+
+    // ---------------------------------------------------------
+    // PROFILE
+    // ---------------------------------------------------------
+
+    function showProfile() {
+
+        alert(
+            "Recruiter Profile"
+        );
+
+    }
+
+
+    function viewProfile() {
+
+        alert(
+            "Profile page will be available soon."
+        );
+
+    }
+
+
+    // ---------------------------------------------------------
+    // AI INSIGHTS
+    // ---------------------------------------------------------
+
+    function viewInsights() {
+
+        alert(
+            "Detailed AI Hiring Insights will be available soon."
+        );
+
+    }
+
+
+    // ---------------------------------------------------------
+    // APPLICATIONS
+    // ---------------------------------------------------------
+
+    function viewAllApplications() {
+
+        alert(
+            "Applications page will be connected to the backend soon."
+        );
+
+    }
+
+
+    // ---------------------------------------------------------
+    // VERIFICATIONS
+    // ---------------------------------------------------------
+
+    function viewAllVerifications() {
+
+        alert(
+            "Verification page will be connected to the backend soon."
+        );
+
+    }
+
+
+    function candidateAction(candidate) {
+
+        alert(
+            "Selected candidate: " + candidate
+        );
+
+    }
+
+
+    function startVerification() {
+
+        alert(
+            "Candidate verification module will be connected to the ML backend soon."
+        );
+
+    }
+
+
+    // ---------------------------------------------------------
+    // REPORTS
+    // ---------------------------------------------------------
+
+    function generateReport() {
+
+        alert(
+            "Report generation will be connected to the backend soon."
+        );
+
+    }
+
+
+    // ---------------------------------------------------------
+    // NAVIGATION ACTIVE STATE
+    // ---------------------------------------------------------
+
+    const navigationLinks =
+        document.querySelectorAll("nav a");
+
+    navigationLinks.forEach(function(link) {
+
+        link.addEventListener("click", function() {
+
+            navigationLinks.forEach(function(item) {
+
+                item.classList.remove(
+                    "text-primary",
+                    "font-bold",
+                    "border-r-4",
+                    "border-primary",
+                    "bg-surface-container-highest"
+                );
+
+                item.classList.add(
+                    "text-on-surface-variant"
+                );
+
+            });
+
+
+            if (
+                !link.getAttribute("href") ||
+                link.getAttribute("href") === "#"
+            ) {
+                return;
+            }
+
+
+            link.classList.remove(
+                "text-on-surface-variant"
+            );
+
+            link.classList.add(
+                "text-primary",
+                "font-bold",
+                "border-r-4",
+                "border-primary",
+                "bg-surface-container-highest"
+            );
+
+        });
+
+    });
+
+
+</script>
+
+</body>
+
+</html>
