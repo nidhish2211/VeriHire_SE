@@ -33,3 +33,10 @@
 * Contributed to the preparation and compilation of DFD and Use Case diagrams representing the proposed system workflow.
 * Worked on improving document formatting, structure, and presentation quality based on instructor feedback.
 * Reviewed the final documentation to ensure that the project requirements and technical details were presented clearly.
+
+## Week 5 — 31 August to 2 September
+
+* Developed the basic backend structure for the VeriHire project.
+* Created the basic frontend with **Login, Signup, and Dashboard** pages.
+* Corrected and refined the **Use Case Diagram** according to the project requirements.
+* Updated the **Data Flow Diagram (DFD)** to accurately represent the system workflow and data flow.
