@@ -41,3 +41,23 @@
 * Corrected and refined the **Use Case Diagram** according to the project requirements.
 * Updated the **Data Flow Diagram (DFD)** to accurately represent the system workflow and data flow.
 
+## Week 6 (Sep 3 - Sep 9): ML Model Development & Frontend-Backend Integration
+
+* Continued development of the VeriHire frontend and backend components.
+* Worked on connecting the authentication flow, including **Login and Signup**, with the backend.
+* Developed and refined the dashboard structure to support the planned VeriHire workflow.
+* Worked on the Machine Learning pipeline for resume/opportunity credibility analysis.
+* Finalized the proposed ML approach involving **semantic text embeddings, structured feature encoding, feature fusion, and an MLP-based classification model**.
+* Worked on integrating the ML analysis workflow with the overall VeriHire system architecture.
+* Tested and refined different components to improve the consistency between the frontend, backend, and ML workflow.
+
+## Week 7 (Sep 10 - Sep 16): UI Refinement, UML/DFD Finalization & System Integration
+
+* Refined the VeriHire frontend interface to improve its overall visual appearance, readability, and consistency.
+* Improved the dashboard and authentication screens with a cleaner and more professional UI structure.
+* Continued backend development and integration of the authentication and application workflow.
+* Finalized the **Use Case Diagram** by restructuring the user flow so that **Register/Login occurs before access to authenticated VeriHire features**.
+* Refined the **DFD Level 0 and Level 1** diagrams to ensure that the system processes, data stores, and data flows accurately represent the implemented architecture.
+* Worked on the **DFD Level 2 — ML Credibility Analysis** to document the detailed ML processing pipeline.
+* Continued integration and testing of the frontend, backend, database, and ML components.
+* Reviewed the overall system architecture and documentation to ensure consistency between the implemented features and the project diagrams.
