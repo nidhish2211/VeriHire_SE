@@ -61,12 +61,10 @@ export default function Sidebar({ className = '' }) {
           className="flex items-center gap-2.5 cursor-pointer overflow-hidden"
           onClick={() => navigate('/dashboard')}
         >
-          <div className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-[#06C167] shrink-0">
-            <ShieldAlert className="w-5 h-5" />
-          </div>
+          
           {isOpen && (
             <span className="text-base font-black font-mono tracking-widest uppercase text-[#F5F5F5] whitespace-nowrap animate-in fade-in duration-200">
-              VeriHire
+              Menu
             </span>
           )}
         </div>

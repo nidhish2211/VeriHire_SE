@@ -47,7 +47,7 @@ export default function DashboardPage() {
         );
       case 'LOW':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#06C167]/10 border border-[#06C167]/30 text-[#06C167] text-[11px] font-mono font-bold tracking-wider uppercase">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#1E90FF]/10 border border-[#1E90FF]/30 text-[#1E90FF] text-[11px] font-mono font-bold tracking-wider uppercase">
             <ShieldCheck className="w-3 h-3" />
             LOW
           </span>
@@ -61,7 +61,7 @@ export default function DashboardPage() {
   const maxActivityValue = Math.max(...activityData.map((d) => d.checks), 10);
 
   return (
-    <div className="flex min-h-screen bg-[#050505] text-[#F5F5F5] font-sans selection:bg-[#06C167]/30 selection:text-white">
+    <div className="flex min-h-screen bg-[#050505] text-[#F5F5F5] font-sans selection:bg-[#1E90FF]/30 selection:text-white">
       {/* Desktop Left Sidebar */}
       <Sidebar className="hidden lg:flex" />
 
@@ -75,8 +75,8 @@ export default function DashboardPage() {
           {/* PAGE HEADER */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#242424]">
             <div className="space-y-2">
-              <span className="text-[11px] font-mono font-bold tracking-widest text-[#06C167] uppercase flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#06C167] animate-pulse" />
+              <span className="text-[11px] font-mono font-bold tracking-widest text-[#1E90FF] uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#1E90FF] animate-pulse" />
                 VERIFICATION CONTROL
               </span>
               <h1 className="text-3xl md:text-4xl font-mono font-black tracking-tight text-[#F5F5F5] uppercase">
@@ -90,7 +90,7 @@ export default function DashboardPage() {
             {/* Primary CTA */}
             <Button
               onClick={() => navigate('/check')}
-              className="bg-[#06C167] hover:bg-[#05a858] text-[#050505] font-mono font-bold uppercase tracking-wider text-xs px-5 py-2.5 rounded-lg shadow-md transition-all flex items-center gap-2 shrink-0 cursor-pointer"
+              className="bg-[#1E90FF] hover:bg-[#05a858] text-[#050505] font-mono font-bold uppercase tracking-wider text-xs px-5 py-2.5 rounded-lg shadow-md transition-all flex items-center gap-2 shrink-0 cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               Check a New Posting
@@ -137,7 +137,7 @@ export default function DashboardPage() {
                 </div>
                 <button
                   onClick={() => navigate('/history')}
-                  className="text-xs font-mono text-[#06C167] hover:underline flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-mono text-[#1E90FF] hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   View All <ArrowRight className="w-3.5 h-3.5" />
                 </button>
@@ -163,7 +163,7 @@ export default function DashboardPage() {
                         className="hover:bg-[#141414] transition-colors group cursor-pointer"
                         onClick={() => navigate(`/check?id=${item.id}`)}
                       >
-                        <td className="py-3.5 px-3 font-semibold text-[#F5F5F5] group-hover:text-[#06C167] transition-colors">
+                        <td className="py-3.5 px-3 font-semibold text-[#F5F5F5] group-hover:text-[#1E90FF] transition-colors">
                           {item.posting}
                         </td>
                         <td className="py-3.5 px-3 text-[#8A8A8A]">
@@ -184,7 +184,7 @@ export default function DashboardPage() {
                               e.stopPropagation();
                               navigate(`/check?id=${item.id}`);
                             }}
-                            className="px-3 py-1 rounded bg-[#141414] border border-[#242424] text-[#F5F5F5] hover:bg-[#06C167] hover:text-[#050505] transition-all text-[11px] font-mono uppercase cursor-pointer"
+                            className="px-3 py-1 rounded bg-[#141414] border border-[#242424] text-[#F5F5F5] hover:bg-[#1E90FF] hover:text-[#050505] transition-all text-[11px] font-mono uppercase cursor-pointer"
                           >
                             View
                           </button>
@@ -225,7 +225,7 @@ export default function DashboardPage() {
                       cx="50"
                       cy="50"
                       r="40"
-                      stroke="#06C167"
+                      stroke="#1E90FF"
                       strokeWidth="10"
                       fill="none"
                       strokeDasharray="42.7 251.2"
@@ -269,8 +269,8 @@ export default function DashboardPage() {
               {/* Donut Legend */}
               <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[#242424] text-center font-mono text-xs">
                 <div className="space-y-1">
-                  <div className="flex items-center justify-center gap-1.5 text-[#06C167]">
-                    <span className="w-2 h-2 rounded-full bg-[#06C167]" />
+                  <div className="flex items-center justify-center gap-1.5 text-[#1E90FF]">
+                    <span className="w-2 h-2 rounded-full bg-[#1E90FF]" />
                     LOW
                   </div>
                   <div className="text-sm font-bold text-[#F5F5F5]">17%</div>
@@ -298,7 +298,7 @@ export default function DashboardPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h2 className="text-base font-mono font-bold text-[#F5F5F5] uppercase tracking-wide flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-[#06C167]" />
+                  <TrendingUp className="w-4 h-4 text-[#1E90FF]" />
                   Verification Activity
                 </h2>
                 <p className="text-xs font-mono text-[#8A8A8A]">
@@ -345,14 +345,14 @@ export default function DashboardPage() {
                             }`
                         )
                         .join(' ')} 500,140`}
-                      fill="url(#greenGradient)"
+                      fill="url(#blueGradient)"
                       opacity="0.15"
                     />
 
                     {/* Gradient definition */}
                     <defs>
-                      <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#06C167" />
+                      <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#1E90FF" />
                         <stop offset="100%" stopColor="#050505" />
                       </linearGradient>
                     </defs>
@@ -360,7 +360,7 @@ export default function DashboardPage() {
                     {/* Line path */}
                     <polyline
                       fill="none"
-                      stroke="#06C167"
+                      stroke="#1E90FF"
                       strokeWidth="2.5"
                       points={activityData
                         .map(
@@ -382,7 +382,7 @@ export default function DashboardPage() {
                             cx={cx}
                             cy={cy}
                             r="4"
-                            className="fill-[#050505] stroke-[#06C167] stroke-2 hover:r-6 transition-all cursor-pointer"
+                            className="fill-[#050505] stroke-[#1E90FF] stroke-2 hover:r-6 transition-all cursor-pointer"
                             onMouseEnter={() => setHoveredDataPoint({ ...d, cx, cy })}
                             onMouseLeave={() => setHoveredDataPoint(null)}
                           />
@@ -453,7 +453,7 @@ export default function DashboardPage() {
                     </div>
                     <button
                       onClick={() => navigate(`/check?id=${item.id}`)}
-                      className="text-xs font-mono text-[#06C167] hover:underline flex items-center gap-1 shrink-0 cursor-pointer uppercase font-bold"
+                      className="text-xs font-mono text-[#1E90FF] hover:underline flex items-center gap-1 shrink-0 cursor-pointer uppercase font-bold"
                     >
                       View Result →
                     </button>
@@ -482,7 +482,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="w-full h-2 bg-[#050505] rounded-full overflow-hidden border border-[#242424]">
                       <div
-                        className="h-full bg-gradient-to-r from-[#06C167] to-[#38BDF8] rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-[#1E90FF] to-[#38BDF8] rounded-full transition-all duration-500"
                         style={{ width: `${sig.percentage}%` }}
                       />
                     </div>
@@ -500,8 +500,8 @@ export default function DashboardPage() {
                 <span className="text-[10px] text-[#555555] uppercase tracking-wider block">
                   SIGNAL ENGINE
                 </span>
-                <span className="text-[#06C167] font-bold flex items-center gap-1.5 mt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#06C167]" />
+                <span className="text-[#1E90FF] font-bold flex items-center gap-1.5 mt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E90FF]" />
                   {SYSTEM_STATUS.signalEngine}
                 </span>
               </div>
@@ -509,8 +509,8 @@ export default function DashboardPage() {
                 <span className="text-[10px] text-[#555555] uppercase tracking-wider block">
                   RISK MODEL
                 </span>
-                <span className="text-[#06C167] font-bold flex items-center gap-1.5 mt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#06C167]" />
+                <span className="text-[#1E90FF] font-bold flex items-center gap-1.5 mt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E90FF]" />
                   {SYSTEM_STATUS.riskModel}
                 </span>
               </div>
@@ -537,8 +537,8 @@ export default function DashboardPage() {
             <div className="flex items-center gap-3 px-4 py-2 bg-[#050505] border border-[#242424] rounded-md shrink-0">
               <div className="relative w-8 h-8 flex items-center justify-center">
                 {/* Micro constellation nodes & connecting lines */}
-                <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-[#06C167] rounded-full animate-ping" />
-                <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-[#06C167] rounded-full" />
+                <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-[#1E90FF] rounded-full animate-ping" />
+                <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-[#1E90FF] rounded-full" />
                 <div className="absolute bottom-1 right-2 w-1.5 h-1.5 bg-[#38BDF8] rounded-full" />
                 <div className="absolute top-3 right-1 w-1 h-1 bg-[#F5F5F5] rounded-full opacity-60" />
                 <svg className="w-full h-full" viewBox="0 0 32 32">
@@ -547,7 +547,7 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-[#06C167] font-bold tracking-widest uppercase">
+                <span className="text-[10px] text-[#1E90FF] font-bold tracking-widest uppercase">
                   SIGNAL NETWORK
                 </span>
                 <span className="text-[9px] text-[#555555] tracking-wider uppercase">
