@@ -198,6 +198,7 @@ const handleSignupSubmit = async (e) => {
           opacity: 0;
           transform: translateY(12px);
           animation: fadeUp .6s ease .25s forwards;
+          transition: all 0.6s ease;
         }
         @keyframes fadeUp {
           to {
@@ -259,6 +260,14 @@ const handleSignupSubmit = async (e) => {
           box-shadow: inset 0 0 0 1px #27272a;
           color: #fafafa;
         }
+        /* Tab transition animation */
+        .auth-tabs [role="tabpanel"] {
+          animation: tabFadeIn 0.4s ease;
+        }
+        @keyframes tabFadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
       `}</style>
 
       {/* Particles canvas */}
@@ -280,10 +289,7 @@ const handleSignupSubmit = async (e) => {
       {/* Header */}
       <header className="absolute left-0 right-0 top-0 z-20 flex items-center justify-between px-6 py-4 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate('/')}>
-          <div className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-50">
-            <ShieldAlert className="h-5 w-5" />
-          </div>
-          <span className="text-sm font-bold font-mono tracking-widest uppercase text-zinc-50">
+          <span className="text-2xl font-bold font-mono tracking-tight uppercase text-zinc-50">
             VerHire
           </span>
         </div>
