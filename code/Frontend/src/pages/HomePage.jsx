@@ -1,10 +1,72 @@
-import React from 'react';
+
+import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ConstellationGrid from '@/components/ui/constellation-grid';
 import { ShieldAlert, LogIn, UserPlus, Search } from 'lucide-react';
 
+gsap.registerPlugin(SplitText);
+
 export default function HomePage() {
   const navigate = useNavigate();
+
+
+const titleRef = useRef(null);
+const descriptionRef = useRef(null);
+
+useEffect(() => {
+  let titleSplit;
+  let descriptionSplit;
+
+  const ctx = gsap.context(() => {
+    gsap.set(
+      [titleRef.current, descriptionRef.current],
+      { opacity: 1 }
+    );
+
+    document.fonts.ready.then(() => {
+      if (!titleRef.current || !descriptionRef.current) return;
+
+      titleSplit = SplitText.create(titleRef.current, {
+        type: "words,lines",
+        mask: "lines",
+      });
+
+      descriptionSplit = SplitText.create(descriptionRef.current, {
+        type: "words",
+        aria: "hidden",
+      });
+
+      const tl = gsap.timeline();
+
+      // First: reveal the main title
+      tl.from(titleSplit.lines, {
+        duration: 0.6,
+        yPercent: 100,
+        opacity: 0,
+        stagger: 0.1,
+        ease: "expo.out",
+      });
+
+      // Second: reveal the description words
+      tl.from(descriptionSplit.words, {
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: "sine.out",
+      }, "-=0.1");
+    });
+  });
+
+  return () => {
+    ctx.revert();
+    titleSplit?.revert();
+    descriptionSplit?.revert();
+  };
+}, []);
+
+
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-slate-950 font-sans select-none">
@@ -15,9 +77,9 @@ export default function HomePage() {
       <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-4 md:px-12 md:py-6 bg-gradient-to-b from-slate-950/80 to-transparent backdrop-blur-xs">
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate('/')}>
-          <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/10">
+          {/* <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/10">
             <ShieldAlert className="w-6 h-6" />
-          </div>
+          </div> */}
           <span className="text-2xl font-black tracking-tight text-white font-mono uppercase">
             VerHire
           </span>
@@ -34,7 +96,7 @@ export default function HomePage() {
           </button>
           <button
             onClick={() => navigate('/signup')}
-            className="px-5 py-2 text-sm font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 transition-all rounded-lg shadow-lg shadow-cyan-400/20 flex items-center gap-2 cursor-pointer font-mono uppercase tracking-wider"
+            className="px-3.5 py-1.5 text-sm font-semibold text-slate-950 bg-cyan-500 hover:bg-cyan-300 transition-all rounded-lg shadow-lg shadow-cyan-400/20 flex items-center gap-2 cursor-pointer font-mono uppercase tracking-wider"
           >
             <UserPlus className="w-4 h-4" />
             Sign Up
@@ -45,12 +107,12 @@ export default function HomePage() {
       {/* Hero Content Overlay: Center Title & Short Description */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 pointer-events-none">
         {/* Main Title */}
-        <h1 className="text-6xl sm:text-7xl md:text-9xl font-black font-mono tracking-tighter uppercase leading-none text-white drop-shadow-2xl">
-          VerHire
+        <h1 ref={titleRef} className="text-6xl sm:text-7xl md:text-9xl font-black font-mono tracking-tighter uppercase leading-none text-white drop-shadow-2xl">
+          VeriHire
         </h1>
 
         {/* Short Description */}
-        <p className="mt-6 text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl font-mono leading-relaxed opacity-80 backdrop-blur-xs px-4">
+        <p ref={descriptionRef} className="animate-me mt-6 text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl font-mono leading-relaxed opacity-80 backdrop-blur-xs px-4">
           Detect, analyze, and flag fake internships before you apply. Protecting students and job seekers from scams, fee-demanding agencies, and deceptive job offers.
         </p>
 

@@ -1,4 +1,5 @@
 'use client';
+import axios from 'axios';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -35,6 +36,16 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
   const [activeTab, setActiveTab] = useState(initialTab);
   const [showLoginPw, setShowLoginPw] = useState(false);
   const [showSignupPw, setShowSignupPw] = useState(false);
+  const [loginEmail, setLoginEmail] = useState('');
+const [loginPassword, setLoginPassword] = useState('');
+
+const [signupName, setSignupName] = useState('');
+const [signupEmail, setSignupEmail] = useState('');
+const [signupPassword, setSignupPassword] = useState('');
+
+const [authError, setAuthError] = useState('');
+const [authMessage, setAuthMessage] = useState('');
+const [loading, setLoading] = useState(false);
 
   // Sync tab with initialTab prop when URL route changes
   useEffect(() => {
@@ -115,15 +126,69 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
     };
   }, []);
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    alert('Logged into VerHire successfully!');
-  };
+  
+const handleLoginSubmit = async (e) => {
+  e.preventDefault();
+  setAuthError('');
+  setAuthMessage('');
+  setLoading(true);
 
-  const handleSignupSubmit = (e) => {
-    e.preventDefault();
-    alert('VerHire account created successfully!');
-  };
+  try {
+    const response = await axios.post(
+      'http://localhost:3000/api/auth/login',
+      {
+        email: loginEmail,
+        password: loginPassword,
+      }
+    );
+
+    const { token, user } = response.data;
+
+    sessionStorage.setItem('authToken', token);
+    sessionStorage.setItem('authUser', JSON.stringify(user));
+
+    setAuthMessage(`Welcome, ${user.name}!`);
+navigate('/dashboard', { replace: true });
+    // Keep the current page until we verify the app's dashboard route.
+  } catch (error) {
+    setAuthError(
+      error.response?.data?.message ||
+      'Login failed. Please try again.'
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
+const handleSignupSubmit = async (e) => {
+  e.preventDefault();
+  setAuthError('');
+  setAuthMessage('');
+  setLoading(true);
+
+  try {
+    await axios.post(
+      'http://localhost:3000/api/auth/signup',
+      {
+        name: signupName,
+        email: signupEmail,
+        password: signupPassword,
+      }
+    );
+
+    setAuthMessage('Account created successfully! Please log in.');
+    setActiveTab('login');
+    navigate('/login', { replace: true });
+  } catch (error) {
+    setAuthError(
+      error.response?.data?.message ||
+      'Signup failed. Please try again.'
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <section className="fixed inset-0 bg-zinc-950 text-zinc-50 select-none overflow-y-auto">
@@ -133,6 +198,7 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
           opacity: 0;
           transform: translateY(12px);
           animation: fadeUp .6s ease .25s forwards;
+          transition: all 0.6s ease;
         }
         @keyframes fadeUp {
           to {
@@ -194,6 +260,14 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
           box-shadow: inset 0 0 0 1px #27272a;
           color: #fafafa;
         }
+        /* Tab transition animation */
+        .auth-tabs [role="tabpanel"] {
+          animation: tabFadeIn 0.4s ease;
+        }
+        @keyframes tabFadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
       `}</style>
 
       {/* Particles canvas */}
@@ -215,10 +289,7 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
       {/* Header */}
       <header className="absolute left-0 right-0 top-0 z-20 flex items-center justify-between px-6 py-4 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate('/')}>
-          <div className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-50">
-            <ShieldAlert className="h-5 w-5" />
-          </div>
-          <span className="text-sm font-bold font-mono tracking-widest uppercase text-zinc-50">
+          <span className="text-2xl font-bold font-mono tracking-tight uppercase text-zinc-50">
             VerHire
           </span>
         </div>
@@ -245,6 +316,17 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
           </CardHeader>
 
           <CardContent>
+          {authError && (
+  <p role="alert" className="mb-3 text-sm text-red-400">
+    {authError}
+  </p>
+)}
+
+{authMessage && (
+  <p role="status" className="mb-3 text-sm text-green-400">
+    {authMessage}
+  </p>
+)}
             <Tabs value={activeTab} onValueChange={handleTabChange} className="auth-tabs w-full">
               <TabsList className="grid w-full grid-cols-2 font-mono">
                 <TabsTrigger value="login">Log In</TabsTrigger>
@@ -265,6 +347,7 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
                         type="email"
                         placeholder="you@company.com"
                         className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                        value={loginEmail} and onChange={(e) => setLoginEmail(e.target.value)}
                         required
                       />
                     </div>
@@ -281,6 +364,7 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
                         type={showLoginPw ? 'text' : 'password'}
                         placeholder="••••••••"
                         className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                        value={loginPassword} and onChange={(e) => setLoginPassword(e.target.value)}
                         required
                       />
                       <button
@@ -309,9 +393,13 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
                     </a>
                   </div>
 
-                  <Button type="submit" className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 cursor-pointer uppercase font-mono font-bold tracking-wider">
-                    Sign in
-                  </Button>
+                <Button
+  type="submit"
+  disabled={loading}
+  className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 cursor-pointer uppercase font-mono font-bold tracking-wider">
+
+  {loading ? 'Please wait...' : 'Sign in'}
+</Button>
                 </form>
               </TabsContent>
 
@@ -328,6 +416,7 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
                         id="name"
                         type="text"
                         placeholder="John Doe"
+                        value={signupName} and onChange={(e) => setSignupName(e.target.value)}
                         className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
                         required
                       />
@@ -344,6 +433,7 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
                         id="signup-email"
                         type="email"
                         placeholder="you@company.com"
+                        value={signupEmail} and onChange={(e) => setSignupEmail(e.target.value)}
                         className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
                         required
                       />
@@ -360,6 +450,7 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
                         id="signup-password"
                         type={showSignupPw ? 'text' : 'password'}
                         placeholder="••••••••"
+                        value={signupPassword} and onChange={(e) => setSignupPassword(e.target.value)}
                         className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
                         required
                       />
@@ -385,8 +476,12 @@ export default function LoginSignUpSection({ initialTab = 'login' }) {
                     </Label>
                   </div>
 
-                  <Button type="submit" className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 cursor-pointer uppercase font-mono font-bold tracking-wider">
-                    Create account
+<Button
+  type="submit"
+  disabled={loading}
+  className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 cursor-pointer uppercase"
+>
+                 {loading ? 'Please wait...' : 'Create account'}   
                   </Button>
                 </form>
               </TabsContent>
